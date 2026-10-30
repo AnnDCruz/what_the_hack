@@ -1,10 +1,12 @@
 # Bas Karo Beta
 
-Humorous Indian-parent screen-time accountability app (React + Vite, plain CSS, no backend).
+A fun, satirical screen-time awareness web app that turns endless scrolling into a chaotic experience of parental interventions.
+
+What it does: Simulates a short-video feed where parents interrupt users every 15 minutes, with escalating levels of chaos, funny notifications, parent modes, and a final screen-time report card.
 
 ## Team Members
-Ann Maria Dcruz
-Michelle Moses
+- Ann Maria Dcruz
+- Michelle Moses
 
 ## Run on Windows (VS Code terminal)
 ```
