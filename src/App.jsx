@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { useSessionTimer } from './hooks/useSessionTimer.js';
 import { POSTS } from './data/posts.js';
@@ -8,6 +9,7 @@ import FeedScreen from './components/FeedScreen.jsx';
 import ParentNotification from './components/ParentNotification.jsx';
 import NotificationHistory from './components/NotificationHistory.jsx';
 import FinalReport from './components/FinalReport.jsx';
+import CornerParent from './components/CornerParent.jsx';
 
 export default function App() {
   const [screen, setScreen] = useState('landing');
@@ -23,18 +25,24 @@ export default function App() {
   const [report, setReport] = useState(null);
   const sessionNo = useRef(0);
 
-  // Called by the timer exactly once per 15-minute threshold.
+  // Trigger a parent intervention at each timer threshold.
   function onThreshold(level) {
     const msg = pickMessage(mode, level, sessionNo.current);
     setHistory((h) => [...h, msg]);
     setNotif(msg);
-    timer.pause(); // freeze time while the parent is talking
+    timer.pause();
   }
+
   const timer = useSessionTimer(onThreshold);
 
   const likedCount = Object.values(liked).filter(Boolean).length;
   const interventions = history.length;
-  const score = chaosScore({ simMs: timer.simMs, interventions, snoozes, likes: likedCount });
+  const score = chaosScore({
+    simMs: timer.simMs,
+    interventions,
+    snoozes,
+    likes: likedCount,
+  });
 
   useEffect(() => {
     if (!flash) return undefined;
@@ -45,21 +53,47 @@ export default function App() {
   function startSession() {
     timer.reset();
     sessionNo.current += 1;
-    setIndex(0); setViewed(1); setLiked({}); setSnoozes(0);
-    setHistory([]); setNotif(null); setLogOpen(false); setReport(null); setFlash('');
+    setIndex(0);
+    setViewed(1);
+    setLiked({});
+    setSnoozes(0);
+    setHistory([]);
+    setNotif(null);
+    setLogOpen(false);
+    setReport(null);
+    setFlash('');
     timer.start();
     setScreen('feed');
   }
 
   function finishSession() {
     const simMs = timer.end();
-    setNotif(null); setLogOpen(false);
-    setReport({ simMs, interventions, level: timer.level, viewed, liked: likedCount, snoozes, mode,
-      chaos: chaosScore({ simMs, interventions, snoozes, likes: likedCount }) });
+    setNotif(null);
+    setLogOpen(false);
+    setReport({
+      simMs,
+      interventions,
+      level: timer.level,
+      viewed,
+      liked: likedCount,
+      snoozes,
+      mode,
+      chaos: chaosScore({
+        simMs,
+        interventions,
+        snoozes,
+        likes: likedCount,
+      }),
+    });
     setScreen('report');
   }
 
-  function goHome() { timer.reset(); setScreen('landing'); }
+  function goHome() {
+    timer.reset();
+    setNotif(null);
+    setLogOpen(false);
+    setScreen('landing');
+  }
 
   function snooze() {
     setFlash(SNOOZE_REPLIES[snoozes % SNOOZE_REPLIES.length]);
@@ -67,37 +101,127 @@ export default function App() {
     setNotif(null);
     timer.resume();
   }
-  function dismiss() { setNotif(null); timer.resume(); }
 
-  function openLog() { if (timer.status === 'running') timer.pause(); setLogOpen(true); }
-  function closeLog() { setLogOpen(false); if (!notif) timer.resume(); }
+  function dismiss() {
+    if (notif && notif.level >= 2) {
+      const nextLevel = notif.level + 1;
+      const nextMsg = pickMessage(mode, nextLevel, sessionNo.current);
+
+      setHistory((h) => [...h, nextMsg]);
+      setNotif(nextMsg);
+      timer.pause();
+      return;
+    }
+
+    // Level 1: resume the timer and wait for the next 15-minute threshold.
+    setNotif(null);
+    timer.resume();
+  }
+
+  function openLog() {
+    if (timer.status === 'running') timer.pause();
+    setLogOpen(true);
+  }
+
+  function closeLog() {
+    setLogOpen(false);
+    if (!notif) timer.resume();
+  }
 
   function navigate(dir) {
     setIndex((i) => (i + dir + POSTS.length) % POSTS.length);
     setViewed((v) => v + 1);
   }
-  const post = POSTS[index];
-  const toggleLike = () => setLiked((l) => ({ ...l, [post.id]: !l[post.id] }));
 
-  const shakeClass = notif ? (notif.level >= 8 ? 'chaos' : notif.level >= 5 ? 'shake' : '') : '';
+  const post = POSTS[index];
+  const toggleLike = () =>
+    setLiked((l) => ({ ...l, [post.id]: !l[post.id] }));
+
+  const shakeClass = notif
+    ? notif.level >= 8
+      ? 'chaos'
+      : notif.level >= 5
+        ? 'shake'
+        : ''
+    : '';
 
   return (
     <div className={`app mode-${mode}`}>
       {screen === 'landing' && (
-        <LandingScreen mode={mode} setMode={setMode} speedMode={timer.speedMode} setSpeedMode={timer.setSpeedMode} onStart={startSession} />
+        <LandingScreen
+          mode={mode}
+          setMode={setMode}
+          speedMode={timer.speedMode}
+          setSpeedMode={timer.setSpeedMode}
+          onStart={startSession}
+        />
       )}
+
       {screen === 'feed' && (
-        <FeedScreen timer={timer} mode={mode} post={post} index={index} total={POSTS.length}
-          liked={!!liked[post.id]} onLike={toggleLike} onNav={navigate} onEnd={finishSession}
-          onOpenLog={openLog} interventions={interventions} viewed={viewed} score={score}
-          blocked={!!notif || logOpen} shakeClass={shakeClass} />
+        <>
+          <FeedScreen
+            timer={timer}
+            mode={mode}
+            post={post}
+            index={index}
+            total={POSTS.length}
+            liked={!!liked[post.id]}
+            onLike={toggleLike}
+            onNav={navigate}
+            onEnd={finishSession}
+            onOpenLog={openLog}
+            interventions={interventions}
+            viewed={viewed}
+            score={score}
+            blocked={!!notif || logOpen}
+            shakeClass={shakeClass}
+          />
+
+          {/* Animated pixel-art parent during active scrolling */}
+          <CornerParent
+            mode={mode}
+            level={timer.level}
+            active={
+              timer.status === 'running' &&
+              !notif &&
+              !logOpen
+            }
+          />
+        </>
       )}
-      {screen === 'report' && report && <FinalReport report={report} onReplay={startSession} onHome={goHome} />}
+
+      {screen === 'report' && report && (
+        <FinalReport
+          report={report}
+          onReplay={startSession}
+          onHome={goHome}
+        />
+      )}
+
       {notif && screen === 'feed' && (
-        <ParentNotification key={notif.level} notif={notif} viewed={viewed} onStop={finishSession} onSnooze={snooze} onDismiss={dismiss} />
+        <ParentNotification
+          key={notif.level}
+          notif={notif}
+          viewed={viewed}
+          mode={mode}
+          onStop={finishSession}
+          onSnooze={snooze}
+          onDismiss={dismiss}
+        />
       )}
-      {logOpen && <NotificationHistory items={history} onClose={closeLog} />}
-      {flash && <div className="flash" role="status">{flash}</div>}
+
+      {logOpen && (
+        <NotificationHistory
+          items={history}
+          onClose={closeLog}
+        />
+      )}
+
+      {flash && (
+        <div className="flash" role="status">
+          {flash}
+        </div>
+      )}
     </div>
   );
 }

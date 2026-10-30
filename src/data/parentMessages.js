@@ -12,46 +12,141 @@ export const LEVELS = [
 
 export const MODES = {
   mom: {
-    label: 'Mom Mode', speaker: 'Mummy', blurb: 'Guilt, love and a very long memory.',
+    label: 'Mom Mode',
+    speaker: 'Mummy',
+    blurb: 'Guilt, love and a very long memory.',
     levels: [
-      ['Beta, bas 15 minute ho gaye. Ab phone rakh do.', 'Aankhein kharab ho jayengi, beta. Thoda break le lo.'],
-      ['Phone ke liye time hai, lekin ghar walon ke saath baithne ka time nahi hai?', 'Main kitni der se awaaz laga rahi hoon, tumhe sunai hi nahi deta?'],
-      ['Sharma Ji ka beta toh abhi tak do chapters khatam kar chuka hai.', 'Sharma Ji ke bete ne aaj subah 5 baje uthkar yoga bhi kiya.'],
-      ['Kal exam hai na? Haan, toh phir ye reels kaun dega exam mein?', 'Syllabus khud ko revise nahi karega, beta.'],
-      ['Humne tumhe phone diya tha padhai ke liye ya duniya bhar ke reels dekhne ke liye?', 'Itna sab kiya tumhare liye, aur tum ek reel bhi nahi chhod sakte?'],
-      ['Ruko. Papa ko batati hoon.', 'Papa ko call laga diya hai. Ab dekhna kya hota hai.'],
-      ['Theek hai. Ab Wi-Fi ka password change hoga.', 'Main router ki taraf ja rahi hoon. Dus tak ginti shuru.'],
-      ['POORA DIN PHONE. Result aayega toh dekhte hain.', 'Rishtedaar poochenge toh kya bolun? Mera beta reels-wala hai?'],
+      [
+        'Beta, it has been 15 minutes. Put the phone down for a little break.',
+        'Your eyes need a break too, beta. Chalo, look away from the screen for a bit.',
+      ],
+      [
+        'You have time for your phone, but no time to sit with your own family?',
+        'I have been calling you for ages, beta! Is this phone the only thing you can hear?',
+      ],
+      [
+        'Sharma Ji’s son has already finished two chapters. Just saying, beta.',
+        'Sharma Ji’s son woke up at 5 AM and did yoga too. I am not comparing, okay?',
+      ],
+      [
+        'Your exam is tomorrow, right? Tell me, beta, will they ask you to write Instagram Reels?',
+        'Your syllabus is not going to revise itself. Phone down, books out!',
+      ],
+      [
+        'Did we buy you a phone for studying or for watching reels all day?',
+        'We do so much for you, beta. And you cannot even give up one little reel?',
+      ],
+      [
+        'Fine. I am telling Papa. You explain this to him.',
+        'I am calling Papa right now. Arre, now let us see what happens.',
+      ],
+      [
+        'That is it. The Wi-Fi password is getting changed. No more discussions.',
+        'I am walking towards the router, beta. You have ten seconds to make a good decision.',
+      ],
+      [
+        'PHONE ALL DAY! When the results come, we will have a family discussion.',
+        'What am I supposed to tell the relatives? My child has a PhD in scrolling?',
+      ],
     ],
-    extra: ['Ab toh mausi ko bhi bata diya hai.', 'Phone ko mandir mein rakh diya hai, shuddh karne ke liye.', 'Dadi ne WhatsApp group mein tumhari photo daal di.', 'Society wali aunty ne bhi poocha: "Sab theek hai na?"'],
+    extra: [
+      'I have told Mausi too. Now the entire family knows, beta.',
+      'I am this close to putting your phone in the temple for some purification.',
+      'Dadi has posted about your screen time in the family WhatsApp group. Good luck.',
+      'Even the society aunty asked if everything is okay at home. Arre, wonderful!',
+    ],
   },
+
   dad: {
-    label: 'Dad Mode', speaker: 'Papa', blurb: 'Few words. Maximum disappointment.',
+    label: 'Dad Mode',
+    speaker: 'Papa',
+    blurb: 'Few words. Maximum disappointment.',
     levels: [
-      ['Beta, pandrah minute ho gaye. Ab bas.', 'Screen time ka bill aata toh bhi itna nahi hota.'],
-      ['Mobile ke liye time hai, lekin kaam ke liye nahi? Interesting.', 'Main tumhari umar mein poora din cricket khelta tha, par padhai bhi karta tha.'],
-      ['Sharma Ji ka beta toh internship bhi kar raha hai. Tum kya kar rahe ho?', 'Verma Ji ka beta bhi abhi library gaya hai.'],
-      ['Marks batao, reels nahi. Report card kab dikhaoge?', 'Scroll karne se percentage nahi badhta.'],
-      ['Itna kharcha kiya, itna bharosa kiya. Aur tum? Scroll.', 'Main kuch kehta nahi, par sab dekhta hoon.'],
-      ['Maine Mummy ko bata diya hai. Dinner par discussion hoga.', 'Dinner table pe baat karte hain. Sabke saamne.'],
-      ['Wi-Fi ka password change ho raha hai. Aaj raat se. Final.', 'Main router ke paas khada hoon. Dus second.'],
-      ['Poora din phone? Kal se savere 5 baje uthna hai. Walk pe chalenge.', 'Phone ab meri almirah mein. Chaabi meri jeb mein.'],
+      [
+        'Beta, 15 minutes are up. Phone down. Bas.',
+        'If screen time had a bill, yours would be higher than the electricity bill.',
+      ],
+      [
+        'Time for mobile, but no time for responsibilities? Interesting.',
+        'When I was your age, beta, I played cricket and still finished my homework.',
+      ],
+      [
+        'Sharma Ji’s son has an internship already. What is your current achievement, beta?',
+        'Even Verma Ji’s son is at the library right now. Just thought you should know.',
+      ],
+      [
+        'Tell me your marks, not your reel count. When am I seeing that report card?',
+        'Scrolling does not increase your percentage, beta. I checked.',
+      ],
+      [
+        'We invested so much in you. So much trust. And all I see is scrolling.',
+        'I may not say much, beta, but I notice everything. Everything.',
+      ],
+      [
+        'I have informed Mummy. We will discuss this at dinner. Face to face.',
+        'Family meeting at dinner, beta. And yes, everyone will be attending.',
+      ],
+      [
+        'The Wi-Fi password is changing tonight. Final decision.',
+        'I am standing next to the router. Ten seconds, beta. Choose wisely.',
+      ],
+      [
+        'Phone all day? Tomorrow we wake up at 5 AM. We are going for a walk.',
+        'Your phone is going in my cupboard. The key is staying in my pocket. Bas.',
+      ],
     ],
-    extra: ['Ab main tumhare Chacha ko call kar raha hoon.', 'Naya rule: phone sirf Sunday ko, aur woh bhi Mummy ki permission se.', 'Pension ki tarah screen time bhi limit mein hona chahiye.', 'Kisi ne kaha tha "bas ek reel"? Woh ek ghanta ho gaya.'],
+    extra: [
+      'I am calling your Chacha now. He has some excellent advice about discipline.',
+      'New rule: phone only on Sundays, and even then, ask Mummy first.',
+      'Even retirement savings have limits, beta. So should your screen time.',
+      'You said “just one reel.” That was an hour ago. Explain the mathematics.',
+    ],
   },
+
   family: {
-    label: 'Full Family Committee', speaker: 'The Committee', blurb: 'Everyone has an opinion. Everyone is in the group.',
+    label: 'Full Family Committee',
+    speaker: 'The Committee',
+    blurb: 'Everyone has an opinion. Everyone is in the group.',
     levels: [
-      ['Mummy|Beta, bas 15 minute ho gaye. Phone rakh do.', 'Papa|Ek chhota break le lo, beta.'],
-      ['Dadi|Hamare zamane mein toh sirf radio tha. Aur sab khush the.', 'Mummy|Ghar walon ke saath baithne ka time nahi hai?'],
-      ['Papa|Sharma Ji ka beta do chapters khatam kar chuka hai.', 'Chacha|Mera beta bhi abhi library mein hai, bataya tha na?'],
-      ['Mummy|Kal exam hai na? Ye reels exam mein kaun likhega?', 'Bua|Meri beti ne toh bina phone ke 95% laaye the.'],
-      ['Mummy|Humne phone padhai ke liye diya tha, reels ke liye nahi!', 'Dadi|Hum kitna sehte hain, tum samajhte hi nahi.'],
-      ['Mummy|Papa ko bata diya. Chacha ko bhi. Mausi bhi group mein aa gayi.', 'Family Group|Beta ke baare mein emergency meeting shuru ho gayi hai.'],
-      ['Papa|Wi-Fi ka password change ho raha hai. Meeting mein sab sehmat hain.', 'Dadi|Vote ho chuka hai: 7-0. Phone gaya.'],
-      ['Poora Parivaar|POORA DIN PHONE. Result aayega toh sab dekhenge.', 'Mausi|Maine toh Sharma Ji ko bhi invite kar diya hai.'],
+      [
+        'Mummy|Beta, 15 minutes are up. Put the phone down and take a break.',
+        'Papa|Just a little break, beta. Your phone will still be there.',
+      ],
+      [
+        'Dadi|In our time, we only had the radio. And somehow, we survived happily.',
+        'Mummy|You have no time to sit with the family anymore? Arre, beta!',
+      ],
+      [
+        'Papa|Sharma Ji’s son has already finished two chapters.',
+        'Chacha|My son is at the library too. I told you about him, remember?',
+      ],
+      [
+        'Mummy|Your exam is tomorrow! Will you write these reels in the exam?',
+        'Bua|My daughter scored 95% without spending all day on her phone. Just saying.',
+      ],
+      [
+        'Mummy|We bought you a phone for studying, not for endless reels!',
+        'Dadi|We do everything for you, beta, and this is what we get?',
+      ],
+      [
+        'Mummy|I told Papa, Chacha, and now Mausi has joined the group too.',
+        'Family Group|Emergency meeting about beta has officially started. Attendance is compulsory.',
+      ],
+      [
+        'Papa|The Wi-Fi password is changing. The committee has approved it.',
+        'Dadi|The vote is complete: 7–0. Phone privileges suspended. Bas!',
+      ],
+      [
+        'Entire Family|PHONE ALL DAY! When the results come, the whole family will see.',
+        'Mausi|I have invited Sharma Ji to the discussion too. This should be interesting.',
+      ],
     ],
-    extra: ['Society Aunty|Maine bhi suna hai. Sab theek toh hai na?', 'Nani|Main video call pe aa rahi hoon. Phone neeche rakho.', 'Chacha|Maine Uncle ko bhi bata diya.', 'Family Group|Naya rule: phone sirf Diwali pe.'],
+    extra: [
+      'Society Aunty|I heard about the screen time. Sab theek hai na, beta?',
+      'Nani|I am joining on video call. Now put the phone down and talk to me!',
+      'Chacha|I have informed Uncle as well. The committee is growing, beta.',
+      'Family Group|New rule: phone only on Diwali. The committee has spoken.',
+    ],
   },
 };
 
