@@ -2,7 +2,7 @@
 
 A fun, satirical screen-time awareness web app that turns endless scrolling into a chaotic experience of parental interventions.
 
-#What it does: Simulates a short-video feed where parents interrupt user every 15 minutes, with escalating levels of chaos, funny notifications, parent modes and a final screen-time report card.
+What it does: Simulates a short-video feed where parents interrupt user every 15 minutes, with escalating levels of chaos, funny notifications, parent modes and a final screen-time report card.
 
 ## Team Members
 - Ann Maria Dcruz
