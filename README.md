@@ -2,6 +2,10 @@
 
 Humorous Indian-parent screen-time accountability app (React + Vite, plain CSS, no backend).
 
+## Team Members
+Ann Maria Dcruz
+Michelle Moses
+
 ## Run on Windows (VS Code terminal)
 ```
 npm install
